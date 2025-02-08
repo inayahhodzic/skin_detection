@@ -1,0 +1,30 @@
+# might have typo's --> copied by typing
+
+def init():
+    global model
+    myfilepath = os.path.join() # hier path naar model?
+    model = load_model.myfilepath()
+
+def run(test_image):
+    label, score = condition(test_image)
+    # return result
+    return label
+
+def main():
+    # Load Azure ML libraries to generate a schema
+    from azureml.api.schema.dataTypes import dataTypes
+    from azureml.ai.schema.sampleDefinition import sampleDefinition
+    from azureml.api.realtime.services import generate_schema
+
+    # test the init and run functions using test data
+    test_image = '54e755f6bae47850e86cdef.jpg' 
+    init()
+    category = run(test_image)
+    print(category)
+
+    # Generate the scema file (schema.json)
+    inputs = {"test.image": sampleDefinition(dataTypes.STANDARD, test_image)}
+    generate_schema(run_func=run, inputs=inputs, filepath='./outputs/schema.json')
+
+if __name__ == "__main__":
+    main()
